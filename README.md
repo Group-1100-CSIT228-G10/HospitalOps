@@ -32,3 +32,9 @@ Casinto, Jess Venzel L.
 Contreras, Criseanne Ymar F.
 Mancao, Julius Isaiah
 Robillos, Matthew John G.
+
+
+<img width="2815" height="2722" alt="useCaseDiagram" src="https://github.com/user-attachments/assets/4da3ee95-ba69-4d0a-834c-b193e5c520b6" />
+
+<img width="2106" height="3420" alt="UmlDiagram" src="https://github.com/user-attachments/assets/c4b89f0e-ee73-45f5-850a-6f16ddfb9b48" />
+
