@@ -70,6 +70,6 @@ public class Consultation {
     }
 
     public String getPatientFullName() {
-        return patient.getFirstName() + " " + patient.getMiddleName() + " " + patient.getLastName();
+        return patient.getFullName();
     }
 }
