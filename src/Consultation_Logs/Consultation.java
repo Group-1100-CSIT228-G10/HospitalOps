@@ -48,7 +48,7 @@ public class Consultation {
     }
 
     public List<UsageLog> getUsageLogs() {
-        return usageLogs;
+        return new ArrayList<>(usageLogs);
     }
     
     public Date getDate() {
