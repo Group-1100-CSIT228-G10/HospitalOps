@@ -24,6 +24,10 @@ public class Consultation {
     }
 
     public void addUsageLog(UsageLog log) {
+        if (isCompleted) {
+            System.out.println("Cannot add usage log. Consultation is already completed.");
+            return;
+        }
         usageLogs.add(log);
     }
 
