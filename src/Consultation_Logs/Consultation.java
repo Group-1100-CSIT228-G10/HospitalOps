@@ -58,7 +58,7 @@ public class Consultation {
         return date;
     }
 
-    public boolean isCompleted() {
+    public boolean getIsCompleted() {
         return isCompleted;
     }
 
