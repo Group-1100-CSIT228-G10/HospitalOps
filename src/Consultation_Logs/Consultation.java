@@ -13,7 +13,7 @@ public class Consultation {
     private List<UsageLog> usageLogs;
     private Date date;
     private boolean isCompleted;
-
+    
     public Consultation(Doctor doctor, Patient patient, String diagnosis) {
         this.doctor = doctor;
         this.patient = patient;
@@ -32,7 +32,13 @@ public class Consultation {
     }
 
     public void completeConsultation() {
-        this.isCompleted = true;
+    if (isCompleted) {
+        System.out.println("Consultation is already completed.");
+        return;
+    }
+
+    this.isCompleted = true;
+    System.out.println("Consultation marked as completed.");
     }
     
     public Doctor getDoctor() {
