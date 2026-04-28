@@ -10,17 +10,14 @@ public class Consultation {
     private Doctor doctor;
     private Patient patient;
     private String diagnosis;
-    private List<UsageLog> usageLogs;
-    private Date date;
-    private boolean isCompleted;
+    private List<UsageLog> usageLogs = new ArrayList<>();
+    private Date date = new Date();
+    private boolean isCompleted = false;
     
     public Consultation(Doctor doctor, Patient patient, String diagnosis) {
         this.doctor = doctor;
         this.patient = patient;
         this.diagnosis = diagnosis;
-        this.usageLogs = new ArrayList<>();
-        this.date = new Date();
-        this.isCompleted = false;
     }
 
     public void addUsageLog(UsageLog log) {
