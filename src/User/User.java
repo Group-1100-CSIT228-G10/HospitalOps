@@ -2,20 +2,18 @@ package User;
 
 public class User {
 
-    protected String firstName;
-    protected String lastName;
-    protected String middleName;
-    protected String gender;
-    protected String city;
-    protected String country;
-    protected String birthDate;
-    protected int age;
+    private String firstName;
+    private String lastName;
+    private String middleName;
+    private String gender;
+    private String city;
+    private String country;
+    private String birthDate;
+    private int age;
 
     public User() {}
 
-    public User(String firstName, String lastName, String middleName,
-                String gender, String city, String country,
-                String birthDate, int age) {
+    public User(String firstName, String lastName, String middleName, String gender, String city, String country, String birthDate, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -38,6 +36,22 @@ public class User {
         return middleName;
     }
 
+     public String getGender() {
+    return gender;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+    
     public int getAge() {
         return age;
     }
