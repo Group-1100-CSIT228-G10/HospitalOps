@@ -1,5 +1,24 @@
 package User;
 
-public class Doctor{
+public class Doctor extends User {
+
+    private String specialization;
+
+    public Doctor() {}
+
+    public Doctor(String userID, String firstName, String lastName,
+                String middleName, String gender, String city, String country, 
+                String birthDate, int age, String specialization) { 
+        super(userID,firstName, lastName, middleName, gender, city, country, birthDate, age);
+        this.specialization = specialization;
+    }
+
+    public String getSpecialization() {
+    return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
 
 }
