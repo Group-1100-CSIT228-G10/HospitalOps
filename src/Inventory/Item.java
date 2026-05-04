@@ -12,4 +12,29 @@ public class Item {
         this.description = description;
         this.quantity = quantity;
     }
+
+    public void displayItem() {
+        System.out.println("ID: " + itemID);
+        System.out.println("Name: " + name);
+        System.out.println("Description: " + description);
+        System.out.println("Quantity: " + quantity);
+    }
+
+    public void addStock(int amount) {  
+        quantity += amount;
+        System.out.println(amount + " added. New quantity: " + quantity);
+    }
+
+    public void reduceStock(int amount) {
+        if (quantity >= amount) {
+            quantity -= amount;
+            System.out.println(amount + " removed. New quantity: " + quantity);
+        } else {
+            System.out.println("Not enough stock.");
+        }
+    }
+
+    public boolean isAvailable() {
+        return quantity > 0;
+    }
 }
