@@ -4,8 +4,6 @@ public class Doctor extends User {
 
     private String specialization;
 
-    public Doctor() {}
-
     public Doctor(String userID, String firstName, String lastName,
                 String middleName, String gender, String city, String country, 
                 String birthDate, int age, String specialization) { 
