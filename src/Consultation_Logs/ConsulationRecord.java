@@ -1,5 +1,5 @@
 package Consultation_Logs;
 
-public class UsageLog {
+public class ConsulationRecord {
     
 }

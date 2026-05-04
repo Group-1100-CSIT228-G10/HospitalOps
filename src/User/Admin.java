@@ -1,6 +1,6 @@
 package User;
 
-public class Admin extends User {
+public class Admin{
 
     private String role;
 
