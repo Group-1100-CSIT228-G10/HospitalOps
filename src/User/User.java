@@ -13,6 +13,16 @@ public class User {
     protected final int age;
 
 
+<<<<<<< HEAD
+    public User() {}
+
+    public User(String userID, String firstName, String lastName,
+               String middleName, String gender, String city,
+               String country, String birthDate, int age) { 
+        this.userID     = userID;
+        this.firstName  = firstName;
+        this.lastName   = lastName;
+=======
     public User(String userID, String firstName, String lastName, String middleName,
                 String gender, String city, String country,
                 String birthDate, int age) {
@@ -20,6 +30,7 @@ public class User {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
+>>>>>>> 72127cbcb64a0c9f1cad7033cb9430effa389968
         this.middleName = middleName;
         this.gender = gender;
         this.city = city;
