@@ -1,80 +1,23 @@
 package User;
 
 public class User {
-<<<<<<< HEAD
-
-    private String userID;
-    private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String middleName;
-    private String gender;
-    private String city;
-    private String country;
-    private String birthDate;
-    private int    age;
-
-    public User() {}
-
-    public User(String userID, String username, String password,
-               String firstName, String lastName, String middleName,
-               String gender, String city, String country,
-               String birthDate, int age) {
-        this.userID     = userID;
-        this.username   = username;
-        this.password   = password;
-        this.firstName  = firstName;
-        this.lastName   = lastName;
-        this.middleName = middleName;
-        this.gender     = gender;
-        this.city       = city;
-        this.country    = country;
-        this.birthDate  = birthDate;
-        this.age        = age;
-    }
+    
+    protected final String userID;
+    protected final String firstName;
+    protected final String lastName;
+    protected final String middleName;
+    protected final String gender;
+    protected final String city;
+    protected final String country;
+    protected final String birthDate;
+    protected final int age;
 
 
-    public String getUserID()     { return userID; }
-    public String getUsername()   { return username; }
-    public String getPassword()   { return password; }
-    public String getFirstName()  { return firstName; }
-    public String getLastName()   { return lastName; }
-    public String getMiddleName() { return middleName; }
-    public String getGender()     { return gender; }
-    public String getCity()       { return city; }
-    public String getCountry()    { return country; }
-    public String getBirthDate()  { return birthDate; }
-    public int    getAge()        { return age; }
-
-    public void setUserID(String userID)         { this.userID     = userID; }
-    public void setUsername(String username)     { this.username   = username; }
-    public void setPassword(String password)     { this.password   = password; }
-    public void setFirstName(String firstName)   { this.firstName  = firstName; }
-    public void setLastName(String lastName)     { this.lastName   = lastName; }
-    public void setMiddleName(String middleName) { this.middleName = middleName; }
-    public void setGender(String gender)         { this.gender     = gender; }
-    public void setCity(String city)             { this.city       = city; }
-    public void setCountry(String country)       { this.country    = country; }
-    public void setBirthDate(String birthDate)   { this.birthDate  = birthDate; }
-    public void setAge(int age)                  { this.age        = age; }
-=======
->>>>>>> f2f53f090c4d9e8ccf810b60a858a94ae88e045f
-
-    protected String firstName;
-    protected String lastName;
-    protected String middleName;
-    protected String gender;
-    protected String city;
-    protected String country;
-    protected String birthDate;
-    protected int age;
-
-    public User() {}
-
-    public User(String firstName, String lastName, String middleName,
+    public User(String userID, String firstName, String lastName, String middleName,
                 String gender, String city, String country,
                 String birthDate, int age) {
+        
+        this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -85,16 +28,24 @@ public class User {
         this.age = age;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public String getLastName() {
-        return lastName;
-    }
+    // public String getFirstName() {
+    //     return firstName;
+    // }
 
-    public String getMiddleName() {
-        return middleName;
+    // public String getLastName() {
+    //     return lastName;
+    // }
+
+    // public String getMiddleName() {
+    //     return middleName;
+    // }
+
+    public String getFullName(){
+        String prefix = ""; 
+        if(gender.equalsIgnoreCase("Male")) prefix = "Mr.";
+        else if(gender.equalsIgnoreCase("Female")) prefix = "Ms.";
+        return prefix + firstName + " " + middleName + " " + lastName;
     }
 
     public int getAge() {
