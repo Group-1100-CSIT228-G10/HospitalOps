@@ -6,8 +6,10 @@ public class Doctor extends User {
 
     public Doctor() {}
 
-    public Doctor(String firstName, String lastName, String middleName, String gender, String city, String country, String birthDate, int age, String specialization) {
-        super(firstName, lastName, middleName, gender, city, country, birthDate, age);
+    public Doctor(String userID, String firstName, String lastName,
+                String middleName, String gender, String city, String country, 
+                String birthDate, int age, String specialization) { 
+        super(userID,firstName, lastName, middleName, gender, city, country, birthDate, age);
         this.specialization = specialization;
     }
 
