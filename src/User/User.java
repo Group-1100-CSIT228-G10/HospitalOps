@@ -1,7 +1,6 @@
 package User;
 
 public class User {
-<<<<<<< HEAD
 
     private String userID;
     private String username;
@@ -17,23 +16,18 @@ public class User {
 
     public User() {}
 
-    public User(String userID, String username, String password,
-               String firstName, String lastName, String middleName,
-               String gender, String city, String country,
-               String birthDate, int age) {
-        this.userID     = userID;
-        this.username   = username;
-        this.password   = password;
-        this.firstName  = firstName;
-        this.lastName   = lastName;
-        this.middleName = middleName;
-        this.gender     = gender;
-        this.city       = city;
-        this.country    = country;
-        this.birthDate  = birthDate;
-        this.age        = age;
-    }
-
+    public User(String firstName, String lastName, String middleName,
+            String gender, String city, String country,
+            String birthDate, int age) {
+    this.firstName  = firstName;
+    this.lastName   = lastName;
+    this.middleName = middleName;
+    this.gender     = gender;
+    this.city       = city;
+    this.country    = country;
+    this.birthDate  = birthDate;
+    this.age        = age;
+}
 
     public String getUserID()     { return userID; }
     public String getUsername()   { return username; }
@@ -47,6 +41,7 @@ public class User {
     public String getBirthDate()  { return birthDate; }
     public int    getAge()        { return age; }
 
+    
     public void setUserID(String userID)         { this.userID     = userID; }
     public void setUsername(String username)     { this.username   = username; }
     public void setPassword(String password)     { this.password   = password; }
@@ -58,60 +53,5 @@ public class User {
     public void setCountry(String country)       { this.country    = country; }
     public void setBirthDate(String birthDate)   { this.birthDate  = birthDate; }
     public void setAge(int age)                  { this.age        = age; }
-=======
->>>>>>> f2f53f090c4d9e8ccf810b60a858a94ae88e045f
 
-    private String firstName;
-    private String lastName;
-    private String middleName;
-    private String gender;
-    private String city;
-    private String country;
-    private String birthDate;
-    private int age;
-
-    public User() {}
-
-    public User(String firstName, String lastName, String middleName, String gender, String city, String country, String birthDate, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
-        this.gender = gender;
-        this.city = city;
-        this.country = country;
-        this.birthDate = birthDate;
-        this.age = age;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-     public String getGender() {
-    return gender;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-    
-    public int getAge() {
-        return age;
-    }
 }
