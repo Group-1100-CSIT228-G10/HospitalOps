@@ -12,25 +12,12 @@ public class User {
     protected final String birthDate;
     protected final int age;
 
-
-<<<<<<< HEAD
-    public User() {}
-
     public User(String userID, String firstName, String lastName,
                String middleName, String gender, String city,
                String country, String birthDate, int age) { 
         this.userID     = userID;
         this.firstName  = firstName;
         this.lastName   = lastName;
-=======
-    public User(String userID, String firstName, String lastName, String middleName,
-                String gender, String city, String country,
-                String birthDate, int age) {
-        
-        this.userID = userID;
-        this.firstName = firstName;
-        this.lastName = lastName;
->>>>>>> 72127cbcb64a0c9f1cad7033cb9430effa389968
         this.middleName = middleName;
         this.gender = gender;
         this.city = city;
@@ -53,10 +40,7 @@ public class User {
     // }
 
     public String getFullName(){
-        String prefix = ""; 
-        if(gender.equalsIgnoreCase("Male")) prefix = "Mr.";
-        else if(gender.equalsIgnoreCase("Female")) prefix = "Ms.";
-        return prefix + firstName + " " + middleName + " " + lastName;
+        return firstName + " " + middleName + " " + lastName;
     }
 
     public int getAge() {
