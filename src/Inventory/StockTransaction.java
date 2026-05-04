@@ -1,6 +1,6 @@
 package Inventory;
 
-public class Item {
+public class StockTransaction {
     public String name;
     public String description;
     public int quantity;
