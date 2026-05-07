@@ -34,7 +34,7 @@ Mancao, Julius Isaiah
 Robillos, Matthew John G.
 
 Use Case Diagram:
-<img width="2815" height="2722" alt="useCaseDiagram" src="https://github.com/user-attachments/assets/4da3ee95-ba69-4d0a-834c-b193e5c520b6" />
+<img width="2815" height="2722" alt="useCaseDiagram" src="https://github.com/Group-1100-CSIT228-G10/HospitalOps/blob/main/image_2026-05-07_124654449.png?raw=true" />
 
 UML Diagram
 <img width="2106" height="3420" alt="UmlDiagram" src="https://github.com/user-attachments/assets/c4b89f0e-ee73-45f5-850a-6f16ddfb9b48" />
