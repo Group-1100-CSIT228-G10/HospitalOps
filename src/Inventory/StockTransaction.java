@@ -8,12 +8,12 @@ public class StockTransaction {
     private Date date;
     private Item item;
 
-    public StockTransaction(int transactionID, String type, int quantityChanged, Item item) {
+    public StockTransaction(int transactionID, String type, int quantityChanged, Item item, Date date) {
         this.transactionID = transactionID;
         this.type = type;
         this.quantityChanged = quantityChanged;
         this.item = item;
-        this.date = new Date();
+        this.date = date;
     }
 
     public void applyTransaction() {

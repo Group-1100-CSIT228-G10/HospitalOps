@@ -10,7 +10,6 @@ public class Item {
         this.itemID = itemID;
         this.name = name;
         this.description = description;
-        this.quantity = quantity;
     }
 
     public void displayItem() {

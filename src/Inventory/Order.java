@@ -1,4 +1,4 @@
-package Order;
+package Inventory;
 
 public class Order {
     public String orderId;
