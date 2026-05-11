@@ -1,19 +1,21 @@
 package Consultation_Logs;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
+import Inventory.Item;
 
 public class Consultation {
 
     private Patient patient;
     private String diagnosis;
-    private List<UsageLog> usageLogs = new ArrayList<>();
     private Date date = new Date();
     private boolean isCompleted = false;
+    private UsageLog usageLog;
 
     public Consultation(Patient patient) {
         this.patient = patient;
+        diagnosis = "";
+        usageLog = null;
     }
 
     public Patient getPatient() {
@@ -24,8 +26,23 @@ public class Consultation {
         return diagnosis;
     }
 
-    public List<UsageLog> getUsageLogs() {
-        return usageLogs;
+    public boolean updateUsageLog(Item item) {
+        if (!isCompleted) {
+            usageLog.addItem(item);
+            return true;
+        } else {
+            System.out.println("Cannot update usage log. Consultation is already completed.");
+            return false;
+        }
+
+    }
+
+    public void InitializeUsageLog(String logName) {
+        if(usageLog == null){
+            this.usageLog = new UsageLog(logName);
+        }else{
+            System.out.println("Usage log already initialized for this consultation.");
+        }
     }
 
     public Date getDate() {
@@ -44,7 +61,4 @@ public class Consultation {
         isCompleted = completed;
     }
 
-    public void addUsageLog(UsageLog log) {
-        usageLogs.add(log);
-    }
 }

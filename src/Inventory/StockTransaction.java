@@ -5,10 +5,10 @@ public class StockTransaction {
     private int transactionID;
     private String type; 
     private int quantityChanged;
-    private Date date;
+    private String date;
     private Item item;
 
-    public StockTransaction(int transactionID, String type, int quantityChanged, Item item, Date date) {
+    public StockTransaction(int transactionID, String type, int quantityChanged, Item item, String date) {
         this.transactionID = transactionID;
         this.type = type;
         this.quantityChanged = quantityChanged;

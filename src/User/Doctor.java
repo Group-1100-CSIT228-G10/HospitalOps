@@ -1,13 +1,12 @@
 package User;
 
+import java.util.*;
 import Consultation_Logs.*;
-import java.util.ArrayList;
-import java.util.List;
+import Inventory.*;
 
 public class Doctor extends User {
 
     private String specialization;
-
     private List<Consultation> consultations = new ArrayList<>();
     private Consultation currentConsultation;
 
@@ -19,11 +18,16 @@ public class Doctor extends User {
     this.specialization = specialization;
     }
 
-    public void startConsultation(Patient patient) {
-        currentConsultation = new Consultation(patient);
+    public void startConsultation() {
+        if(currentConsultation == null){
+                currentConsultation = consultations.getFirst();
+                currentConsultation = new Consultation(currentConsultation.getPatient());
+        }else{
+            System.out.println("A consultation is already in progress. Please complete it before starting a new one.");
+        }
     }
 
-    public void addUsageLog(UsageLog log) {
+    public void addUsageLog(Item item) {
         if (currentConsultation != null && !currentConsultation.isCompleted()) {
             currentConsultation.addUsageLog(log);
         }
@@ -47,11 +51,13 @@ public class Doctor extends User {
         return consultations;
     }
 
-    public Consultation getCurrentConsultation() {
-        return currentConsultation;
-    }
-
+    
     public String getSpecialization() {
         return specialization;
     }
+
+    // public Consultation getCurrentConsultation() {
+    //     return currentConsultation;
+    // }
+
 }
