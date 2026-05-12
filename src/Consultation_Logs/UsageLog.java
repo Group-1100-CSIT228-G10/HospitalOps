@@ -1,35 +1,38 @@
 package Consultation_Logs;
 
+import java.util.*;
+import Inventory.*;
+
 public class UsageLog {
 
-    private String itemName;
-    private int quantity;
-    private boolean processed = false;
+    private ArrayList<Item> logList;
+    private String logName;
+    public boolean processed;
 
-    public UsageLog() {}
-
-    public UsageLog(String itemName, int quantity) {
-        this.itemName = itemName;
-        this.quantity = quantity;
+    public UsageLog(String logName) {
+        this.logName = logName;
+        logList = new ArrayList<>();
+        processed = false;
     }
 
-    public String getItemName() {
-        return itemName;
+    public boolean addItem(Item item) {
+        if (item.isAvailable()) {
+            logList.add(item);
+            return true;
+        } else {
+            System.out.println("Item " + item.name + " is not available.");
+            return false;
+        }
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public boolean isProcessed() {
-        return processed;
+    public void displayLog() {
+        System.out.println("Usage Log: " + logName);
+        for (Item item : logList) {
+            System.out.println("- " + item.name);
+        }
     }
 
     public void markProcessed() {
         this.processed = true;
-    }
-
-    public String toString() {
-        return itemName + " - " + quantity;
     }
 }

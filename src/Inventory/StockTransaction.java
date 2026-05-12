@@ -1,42 +1,36 @@
 package Inventory;
 
-import java.util.Date;
-
 public class StockTransaction {
 
-    public enum TransactionType {
-        IN, OUT
-    }
-
+    private int transactionID;
+    private String type; 
+    private int quantityChanged;
+    private String date;
     private Item item;
-    private int quantity;
-    private TransactionType type;
-    private Date date;
 
-    public StockTransaction(Item item, int quantity, TransactionType type) {
-        this.item = item;
-        this.quantity = quantity;
+    public StockTransaction(int transactionID, String type, int quantityChanged, Item item, String date) {
+        this.transactionID = transactionID;
         this.type = type;
-        this.date = new Date();
+        this.quantityChanged = quantityChanged;
+        this.item = item;
+        this.date = date;
     }
 
-    public Item getItem() {
-        return item;
+    public void applyTransaction() {
+        if (type.equalsIgnoreCase("IN")) {
+            item.addStock(quantityChanged);
+        } else if (type.equalsIgnoreCase("OUT")) {
+            item.reduceStock(quantityChanged);
+        } else {
+            System.out.println("Invalid transaction type!");
+        }
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public TransactionType getType() {
-        return type;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public String toString() {
-        return type + " - " + item.name + " - " + quantity;
+    public void displayTransaction() {
+        System.out.println("Transaction ID: " + transactionID);
+        System.out.println("Type: " + type);
+        System.out.println("Quantity: " + quantityChanged);
+        System.out.println("Date: " + date);
+        System.out.println("Item: " + item.name);
     }
 }
