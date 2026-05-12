@@ -19,7 +19,7 @@ public class Nurse extends User {
     }
 
     public void updateInventoryFromUsage(UsageLog log, Item item) {
-        if (!log.isProcessed()) {
+        if (!log.processed) {
             StockTransaction transaction = new StockTransaction(item, log.getQuantity(), StockTransaction.TransactionType.OUT);
             inventory.addTransaction(transaction);
             log.markProcessed();

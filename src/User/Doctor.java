@@ -28,8 +28,12 @@ public class Doctor extends User {
     }
 
     public void addUsageLog(Item item) {
-        if (currentConsultation != null && !currentConsultation.isCompleted()) {
-            currentConsultation.addUsageLog(log);
+        if (currentConsultation != null) {
+            if(currentConsultation.updateUsageLog(item)){
+                System.out.println("Item " + item.name + " added to the consultation log.");
+            } else {
+                System.out.println("Failed to add item " + item.name + " to the consultation log.");
+            }
         }
     }
 
