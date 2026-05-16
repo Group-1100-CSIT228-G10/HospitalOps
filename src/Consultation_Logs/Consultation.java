@@ -13,11 +13,11 @@ public class Consultation {
     private boolean isCompleted = false;
     private UsageLog usageLog;
 
-    public Consultation(Patient patient) {
+    public Consultation(Patient patient, Date date) {
         this.patient = patient;
+        this.date = date;
         symptoms = new ArrayList<>();
         diagnosis = "";
-        date = new Date();
         usageLog = null;
     }
 
@@ -76,6 +76,5 @@ public class Consultation {
     public void setDiagnosis(String diagnosis) {
         this.diagnosis = diagnosis;
     }
-
 
 }
