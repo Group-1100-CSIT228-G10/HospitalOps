@@ -1,15 +1,19 @@
 package Inventory;
 
+import java.util.*;
+
 public class Supplier {
 
     public int supplierID;
     public String name;
     public String contactInfo;
+    public Queue<StockTransaction> pendingTransactions;
 
     public Supplier(int supplierID, String name, String contactInfo) {
         this.supplierID = supplierID;
         this.name = name;
         this.contactInfo = contactInfo;
+        this.pendingTransactions = new LinkedList<>();
     }
 
     public void displaySupplier() {
