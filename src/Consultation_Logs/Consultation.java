@@ -7,10 +7,10 @@ import Inventory.Item;
 public class Consultation {
 
     private Patient patient;
-    private ArrayList<String> symptoms;
-    private String diagnosis;
     private Date date;
+    private ArrayList<String> symptoms;
     private UsageLog usageLog;
+    private String diagnosis;
     public boolean isCompleted;
 
     public Consultation(Patient patient, String LogName, Date date) {
@@ -56,16 +56,21 @@ public class Consultation {
         }
     }
 
-    public String getDiagnosis() {
-        return diagnosis;
-    }
-
     public void setDiagnosis(String diagnosis) {
         this.diagnosis = diagnosis;
     }
 
-    public UsageLog getUsageLog() {
-        return usageLog;
+    public void displayConsultationDetails() {
+        if(isCompleted){
+        PatientDetails();
+            getSymptoms();
+            System.out.println("Diagnosis: " + diagnosis);
+            if (usageLog != null) {
+                usageLog.displayLog();
+            }
+        } else {
+            System.out.println("Consultation is not completed yet. Please complete the consultation to view details."); 
+        }
     }
 
     //private methods

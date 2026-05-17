@@ -5,8 +5,8 @@ import Inventory.*;
 
 public class UsageLog {
 
-    private ArrayList<Item> logList;
     private String logName;
+    private ArrayList<Item> logList;
     public boolean processed;
 
     public UsageLog(String logName) {

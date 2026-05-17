@@ -30,12 +30,9 @@ public class Doctor extends User {
         }
     }
 
-    public void consultationDetails() {
+    public void viewPatientSymptoms() {
         if (currentConsultation != null) {
-            System.out.println("Consultation Details:");
-            System.out.println("Patient: " + currentConsultation.getPatient().getFullName());
             currentConsultation.getSymptoms();
-            System.out.println("Diagnosis: " + currentConsultation.getDiagnosis());
         } else {
             System.out.println("No consultation in progress.");
         }
@@ -60,7 +57,7 @@ public class Doctor extends User {
 
     public void completeConsultation() {
         if (currentConsultation != null) {
-            currentConsultation.setCompleted(true);
+            currentConsultation.isCompleted = true;
             consultations.add(currentConsultation);
             currentConsultation = null;
         } else {
