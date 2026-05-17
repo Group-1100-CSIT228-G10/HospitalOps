@@ -77,4 +77,8 @@ public class Consultation {
         this.diagnosis = diagnosis;
     }
 
+    public UsageLog getUsageLog() {
+        return usageLog;
+    }
+
 }

@@ -21,13 +21,27 @@ public class Doctor extends User {
     public void startConsultation() {
         if(currentConsultation == null){
                 currentConsultation = consultations.getFirst();
-                currentConsultation = new Consultation(currentConsultation.getPatient());
-        }else{
+        }
+        else if(consultations.isEmpty()){
+            System.out.println("No consultations available.");
+        }
+        else{
             System.out.println("A consultation is already in progress. Please complete it before starting a new one.");
         }
     }
 
-    public void addUsageLog(Item item) {
+    public void consultationDetails() {
+        if (currentConsultation != null) {
+            System.out.println("Consultation Details:");
+            System.out.println("Patient: " + currentConsultation.getPatient().getFullName());
+            currentConsultation.getSymptoms();
+            System.out.println("Diagnosis: " + currentConsultation.getDiagnosis());
+        } else {
+            System.out.println("No consultation in progress.");
+        }
+    }
+
+    public void addItem(Item item) {
         if (currentConsultation != null) {
             if(currentConsultation.updateUsageLog(item)){
                 System.out.println("Item " + item.name + " added to the consultation log.");
@@ -48,20 +62,13 @@ public class Doctor extends User {
             currentConsultation.setCompleted(true);
             consultations.add(currentConsultation);
             currentConsultation = null;
+        } else {
+            System.out.println("No consultation in progress to complete.");
         }
     }
 
-    public List<Consultation> getConsultations() {
-        return consultations;
-    }
-
-    
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    // public Consultation getCurrentConsultation() {
-    //     return currentConsultation;
+    // public String getSpecialization() {
+    //     return specialization;
     // }
 
 }

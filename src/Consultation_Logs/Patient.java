@@ -21,16 +21,9 @@ public class Patient {
         this.birthDate = birthDate;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    
+    public String getFullName() {
+        return firstName + " " + middleName + " " + lastName;
     }
 
     public String getBirthDate() {
@@ -45,7 +38,4 @@ public class Patient {
         return address;
     }
 
-    public String getFullName() {
-        return firstName + " " + middleName + " " + lastName;
-    }
 }
