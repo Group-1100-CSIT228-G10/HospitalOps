@@ -54,6 +54,7 @@ public class Doctor extends User {
     public void setDiagnosis(String diagnosis) {
         if (currentConsultation != null) {
             currentConsultation.setDiagnosis(diagnosis);
+            completeConsultation();
         }
     }
 
