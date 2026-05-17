@@ -18,13 +18,19 @@ public class Nurse extends User {
         this.inventory = inventory;
     }
 
-    public void updateInventoryFromUsage(UsageLog log, Item item) {
-        if (!log.processed) {
-            StockTransaction transaction = new StockTransaction(item, log.getQuantity(), StockTransaction.TransactionType.OUT);
-            inventory.addTransaction(transaction);
-            log.markProcessed();
-        }
-    }
+    
+    //should be the one to create queue tickets for patients and assign them to doctors
+    //should also be able to update the inventory when doctors add items to usage logs during consultations
+    
+
+
+    // public void updateInventoryFromUsage(UsageLog log, Item item) {
+    //     if (!log.processed) {
+    //         StockTransaction transaction = new StockTransaction(item, log.getQuantity(), StockTransaction.TransactionType.OUT);
+    //         inventory.addTransaction(transaction);
+    //         log.markProcessed();
+    //     }
+    // }
 
     public String getDepartment() {
         return department;
