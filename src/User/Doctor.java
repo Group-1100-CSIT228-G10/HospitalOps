@@ -21,13 +21,24 @@ public class Doctor extends User {
     public void startConsultation() {
         if(currentConsultation == null){
                 currentConsultation = consultations.getFirst();
-                currentConsultation = new Consultation(currentConsultation.getPatient());
-        }else{
+        }
+        else if(consultations.isEmpty()){
+            System.out.println("No consultations available.");
+        }
+        else{
             System.out.println("A consultation is already in progress. Please complete it before starting a new one.");
         }
     }
 
-    public void addUsageLog(Item item) {
+    public void viewPatientSymptoms() {
+        if (currentConsultation != null) {
+            currentConsultation.getSymptoms();
+        } else {
+            System.out.println("No consultation in progress.");
+        }
+    }
+
+    public void addItem(Item item) {
         if (currentConsultation != null) {
             if(currentConsultation.updateUsageLog(item)){
                 System.out.println("Item " + item.name + " added to the consultation log.");
@@ -40,28 +51,22 @@ public class Doctor extends User {
     public void setDiagnosis(String diagnosis) {
         if (currentConsultation != null) {
             currentConsultation.setDiagnosis(diagnosis);
+            completeConsultation();
         }
     }
 
     public void completeConsultation() {
         if (currentConsultation != null) {
-            currentConsultation.setCompleted(true);
+            currentConsultation.isCompleted = true;
             consultations.add(currentConsultation);
             currentConsultation = null;
+        } else {
+            System.out.println("No consultation in progress to complete.");
         }
     }
 
-    public List<Consultation> getConsultations() {
-        return consultations;
-    }
-
-    
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    // public Consultation getCurrentConsultation() {
-    //     return currentConsultation;
+    // public String getSpecialization() {
+    //     return specialization;
     // }
 
 }

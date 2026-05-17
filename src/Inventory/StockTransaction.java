@@ -26,7 +26,7 @@ public class StockTransaction {
         }
     }
 
-    public void displayTransaction() {
+    public void displayTransaction() {  
         System.out.println("Transaction ID: " + transactionID);
         System.out.println("Type: " + type);
         System.out.println("Quantity: " + quantityChanged);
