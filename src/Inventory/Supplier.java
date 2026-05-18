@@ -7,21 +7,23 @@ public class Supplier {
     public int supplierID;
     public String name;
     public String contactInfo;
-    public Queue<StockTransaction> pendingTransactions;
+    public Queue<Order> pendingOrders;
 
     public Supplier(int supplierID, String name, String contactInfo) {
         this.supplierID = supplierID;
         this.name = name;
         this.contactInfo = contactInfo;
-        this.pendingTransactions = new LinkedList<>();
+        this.pendingOrders = new LinkedList<>();
     }
 
-    public void processPendingTransactions() {
-        while (!pendingTransactions.isEmpty()) {
-            StockTransaction transaction = pendingTransactions.poll();
-            transaction.applyTransaction();
-            System.out.println("Processed transaction ID: " + transaction.transactionID);
+    public List<StockTransaction> processPendingOrders() {
+        List<StockTransaction> transactions = new ArrayList<>();
+        while (!pendingOrders.isEmpty()) {
+            Order order = pendingOrders.poll();
+            System.out.println("Processing order from supplier " + name + ":");
+            order.displayOrder();
         }
+        return transactions;
     }
 
     public void displaySupplier() {

@@ -51,6 +51,10 @@ public class Doctor extends User {
                 }
             }
             System.out.println("Item not available.");
+            return;
+        }else{
+            System.out.println("No consultation in progress.");
+            return;
         }
     }
 

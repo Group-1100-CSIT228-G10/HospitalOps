@@ -30,7 +30,7 @@ public class Inventory {
         System.out.println("Item not available.");
     }
 
-    public void removeStock(String item, int amount) {
+    public void takeStock(String item, int amount) {
         for(Item i : AvailableItems) {
             if (i.name.equalsIgnoreCase(item)) {
                 int currentQuantity = stock.getOrDefault(i, 0);

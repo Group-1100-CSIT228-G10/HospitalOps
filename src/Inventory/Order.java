@@ -1,35 +1,20 @@
 package Inventory;
 
-public class Order {
-    public String orderId;
-    public String itemName;
-    public int quantity;
-    public String status;
+import java.util.*;
 
-    public Order(String orderId, String itemName, int quantity, String status) {
+public class Order {
+    private String orderId;
+    private Map<String, Integer> items;
+
+    public Order(String orderId, Map<String, Integer> items) {
         this.orderId = orderId;
-        this.itemName = itemName;
-        this.quantity = quantity;
-        this.status = status;
+        this.items = items;
     }
 
     public void displayOrder() {
         System.out.println("Order ID: " + orderId);
-        System.out.println("Item: " + itemName);
-        System.out.println("Quantity: " + quantity);
-        System.out.println("Status: " + status);
-    }
-
-    public void updateStatus(String newStatus) {
-        this.status = newStatus;
-    }
-
-    public boolean isCompleted() {
-        return status.equalsIgnoreCase("Completed");
-    }
-        
-    public void processOrder() {
-        System.out.println("Processing order " + orderId + "...");
-        status = "Processing";
+        for (Map.Entry<String, Integer> entry : items.entrySet()) {
+            System.out.println("Item: " + entry.getKey() + ", Quantity: " + entry.getValue());
+        }
     }
 }
