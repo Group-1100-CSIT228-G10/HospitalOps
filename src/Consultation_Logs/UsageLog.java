@@ -15,14 +15,15 @@ public class UsageLog {
         processed = false;
     }
 
-    public boolean addItem(Item item) {
-        if (item.isAvailable()) {
+    public boolean addItem(Item item) {  
+        if (!processed) {
             logList.add(item);
             return true;
-        } else {
-            System.out.println("Item " + item.name + " is not available.");
+        }else{
+            System.out.println("Cannot add item. Log has already been processed.");
             return false;
         }
+
     }
 
     public void displayLog() {

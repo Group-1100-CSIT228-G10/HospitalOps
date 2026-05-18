@@ -16,6 +16,14 @@ public class Supplier {
         this.pendingTransactions = new LinkedList<>();
     }
 
+    public void processPendingTransactions() {
+        while (!pendingTransactions.isEmpty()) {
+            StockTransaction transaction = pendingTransactions.poll();
+            transaction.applyTransaction();
+            System.out.println("Processed transaction ID: " + transaction.transactionID);
+        }
+    }
+
     public void displaySupplier() {
         System.out.println("Supplier ID: " + supplierID);
         System.out.println("Name: " + name);
