@@ -5,14 +5,15 @@ import java.util.*;
 public class StockTransaction {
 
     private int transactionID;
-    private Map<String, Integer> items;
+    private Map<Item, Integer> items;
     private Date date;
 
-    public StockTransaction(int transactionID, Map<String, Integer> items, Date date) {
+    public StockTransaction(int transactionID, Map<Item, Integer> items, Date date) {
         this.transactionID = transactionID;
         this.items = items;
         this.date = date;
     }
+    
 
     // public void applyTransaction() {
     //     if (type.equalsIgnoreCase("IN")) {

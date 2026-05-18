@@ -11,6 +11,10 @@ public class Order {
         this.items = items;
     }
 
+    public Map<String, Integer> getItems() {
+        return items;
+    }
+
     public void displayOrder() {
         System.out.println("Order ID: " + orderId);
         for (Map.Entry<String, Integer> entry : items.entrySet()) {
