@@ -18,7 +18,25 @@ public class Supplier {
         this.availableItems = availableItems;
     }
 
-    public List<StockTransaction> processPendingOrders() {
+    public List<StockTransaction> callToConfirm(){
+        return processPendingOrders();
+    }
+
+    public void displaySupplier() {
+        System.out.println("Supplier ID: " + supplierID);
+        System.out.println("Name: " + name);
+        System.out.println("Contact: " + contactInfo);
+    }
+
+    public void addAvailableItem(Item item) {
+        if (!availableItems.contains(item)) {
+            availableItems.add(item);
+        }else {
+            System.out.println("Item already available from this supplier.");
+        }
+    }
+
+    private List<StockTransaction> processPendingOrders() {
         List<StockTransaction> transactions = new ArrayList<>();
         while (!pendingOrders.isEmpty()) {
             Order order = pendingOrders.poll();
@@ -37,20 +55,6 @@ public class Supplier {
             transactions.add(transaction);
         }
         return transactions;
-    }
-
-    public void displaySupplier() {
-        System.out.println("Supplier ID: " + supplierID);
-        System.out.println("Name: " + name);
-        System.out.println("Contact: " + contactInfo);
-    }
-
-    public void addAvailableItem(Item item) {
-        if (!availableItems.contains(item)) {
-            availableItems.add(item);
-        }else {
-            System.out.println("Item already available from this supplier.");
-        }
     }
 
 }

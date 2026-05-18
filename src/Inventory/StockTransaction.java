@@ -14,6 +14,18 @@ public class StockTransaction {
         this.date = date;
     }
     
+    public int getTransactionID() {
+        return transactionID;
+    }
+
+    public Map<Item, Integer> getItems() {
+        return items;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
 
     // public void applyTransaction() {
     //     if (type.equalsIgnoreCase("IN")) {

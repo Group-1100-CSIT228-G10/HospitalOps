@@ -20,29 +20,48 @@ public class Inventory {
         }
     }
 
-    public void addStock(String item, int amount) {
-        for(Item i : AvailableItems) {
-            if (i.name.equalsIgnoreCase(item)) {
-                stock.put(i, stock.getOrDefault(i, 0) + amount);
-                return;
+    public void addStock(Map<Item, Integer> itemsToAdd) {
+        if(itemsToAdd == null || itemsToAdd.isEmpty()) {
+            System.out.println("No items to add.");
+            return;
+        }
+
+        for (Map.Entry<Item, Integer> entry : itemsToAdd.entrySet()) {
+            Item item = entry.getKey();
+            int amount = entry.getValue();
+            for (Item i : AvailableItems) {
+                if (i.name.equalsIgnoreCase(item.name)) {
+                    stock.put(i, stock.getOrDefault(i, 0) + amount);
+                    break;
+                }
             }
         }
-        System.out.println("Item not available.");
     }
 
-    public void takeStock(String item, int amount) {
-        for(Item i : AvailableItems) {
-            if (i.name.equalsIgnoreCase(item)) {
-                int currentQuantity = stock.getOrDefault(i, 0);
-                if (currentQuantity >= amount) {
-                    stock.put(i, currentQuantity - amount);
-                } else {
-                    System.out.println("Not enough stock.");
+    public void takeStock(Map<Item, Integer> itemsToTake) {
+        if(itemsToTake == null || itemsToTake.isEmpty()) {
+            System.out.println("No items to take.");
+            return;
+        }
+
+        for (Map.Entry<Item, Integer> entry : itemsToTake.entrySet()) {
+            Item item = entry.getKey();
+            int amount = entry.getValue();
+            for (Item i : AvailableItems) {
+                if (i.name.equalsIgnoreCase(item.name)) {
+                    int currentQuantity = stock.getOrDefault(i, 0);
+                    if (currentQuantity >= amount) {
+                        stock.put(i, currentQuantity - amount);
+                    } else {
+                        System.out.println("Not enough stock for item: " + i.name);
+                    }
+                    break;
                 }
-                return;
             }
         }
-        System.out.println("Item not available.");
     }
+
+    
 }
+
 
