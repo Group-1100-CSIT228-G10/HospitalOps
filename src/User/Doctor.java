@@ -38,13 +38,23 @@ public class Doctor extends User {
         }
     }
 
-    public void addItem(Item item) {
+    public void addItem(String item, List<Item> availableItems) {
         if (currentConsultation != null) {
-            if(currentConsultation.updateUsageLog(item)){
-                System.out.println("Item " + item.name + " added to the consultation log.");
-            } else {
-                System.out.println("Failed to add item " + item.name + " to the consultation log.");
+            for(Item i : availableItems) {
+                if (i.name.equalsIgnoreCase(item)) {
+                    if(currentConsultation.updateUsageLog(i)){
+                        System.out.println("Item " + i.name + " added to the consultation log.");
+                    } else {
+                        System.out.println("Failed to add item " + i.name + " to the consultation log.");
+                    }
+                    return;
+                }
             }
+            System.out.println("Item not available.");
+            return;
+        }else{
+            System.out.println("No consultation in progress.");
+            return;
         }
     }
 

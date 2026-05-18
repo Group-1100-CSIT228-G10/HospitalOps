@@ -1,39 +1,67 @@
 package Inventory;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class Inventory {
 
-    private Item item;
-    private int quantity;
-    private Queue<StockTransaction> transactionQueue;
+    private Map<Item, Integer> stock;
+    private List<Item> AvailableItems;
+    // private Queue<StockTransaction> transactionQueue;
 
-    public Inventory(Item item, int quantity) {
-        this.item = item;
-        this.quantity = quantity;
-        this.transactionQueue = new LinkedList<>();
+    public Inventory(List<Item> availableItems) {
+        this.stock = new HashMap<>();
+        this.AvailableItems = availableItems;
     }
 
-    public void addTransaction(StockTransaction transaction) {
-        transactionQueue.add(transaction);
-
-        if (transaction.getType() == StockTransaction.TransactionType.IN) {
-            quantity += transaction.getQuantity();
-        } else {
-            quantity -= transaction.getQuantity();
+    public void displayStock() {
+        System.out.println("Current Inventory:");
+        for (Map.Entry<Item, Integer> entry : stock.entrySet()) {
+            System.out.println("- " + entry.getKey().name + ": " + entry.getValue());
         }
     }
 
-    public Item getItem() {
-        return item;
+    public void addStock(Map<Item, Integer> itemsToAdd) {
+        if(itemsToAdd == null || itemsToAdd.isEmpty()) {
+            System.out.println("No items to add.");
+            return;
+        }
+
+        for (Map.Entry<Item, Integer> entry : itemsToAdd.entrySet()) {
+            Item item = entry.getKey();
+            int amount = entry.getValue();
+            for (Item i : AvailableItems) {
+                if (i.name.equalsIgnoreCase(item.name)) {
+                    stock.put(i, stock.getOrDefault(i, 0) + amount);
+                    break;
+                }
+            }
+        }
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void takeStock(Map<Item, Integer> itemsToTake) {
+        if(itemsToTake == null || itemsToTake.isEmpty()) {
+            System.out.println("No items to take.");
+            return;
+        }
+
+        for (Map.Entry<Item, Integer> entry : itemsToTake.entrySet()) {
+            Item item = entry.getKey();
+            int amount = entry.getValue();
+            for (Item i : AvailableItems) {
+                if (i.name.equalsIgnoreCase(item.name)) {
+                    int currentQuantity = stock.getOrDefault(i, 0);
+                    if (currentQuantity >= amount) {
+                        stock.put(i, currentQuantity - amount);
+                    } else {
+                        System.out.println("Not enough stock for item: " + i.name);
+                    }
+                    break;
+                }
+            }
+        }
     }
 
-    public Queue<StockTransaction> getTransactionQueue() {
-        return transactionQueue;
-    }
+    
 }
+
+
