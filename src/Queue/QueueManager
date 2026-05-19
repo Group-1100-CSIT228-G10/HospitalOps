@@ -1,5 +1,8 @@
 package Queue;
 
+import java.util.*;
+import Consultation_Logs.*;
+
 public class QueueManager{
     private Queue<QueueTicket> queue;
 

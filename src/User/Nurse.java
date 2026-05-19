@@ -1,7 +1,9 @@
 package User;
 
-import Inventory.*;
 import Consultation_Logs.*;
+import Inventory.*;
+import Queue.*;
+
 import java.util.*;
 
 public class Nurse extends User {
@@ -19,7 +21,11 @@ public class Nurse extends User {
     
     //should be the one to create queue tickets for patients and assign them to doctors
     //should also be able to update the inventory when doctors add items to usage logs during consultations
-    
+   
+    public void createQueueTicket(String ticketID, String doctorSpecialtyPreferred, Consultation consultation, QueueManager queueManager) {
+        QueueTicket ticket = new QueueTicket(ticketID, doctorSpecialtyPreferred, consultation);
+        queueManager.addToQueue(ticket);
+    }
     
     public void updateInventoryFromUsage(Map<Item, Integer> usage, Inventory inventory) {
         for (Map.Entry<Item, Integer> entry : usage.entrySet()) {
@@ -33,8 +39,6 @@ public class Nurse extends User {
         Order order = new Order("ORD" + new Random().nextInt(1000), items);
         supplier.pendingOrders.add(order);
     }
-
-    
 
     public void callSupplier(Supplier supplier, Inventory inventory) {
         List<StockTransaction> transactions = supplier.callToConfirm();
