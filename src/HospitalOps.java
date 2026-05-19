@@ -1,14 +1,13 @@
 
-import java.util.List;
-import java.util.Random;
-
+import java.util.*;
 import User.*;
 import Inventory.*;
 import Consultation_Logs.*;
 import QueueMngr.*; 
 
-public class Main {
-    public static void main(String[] args) {
+public class HospitalOps {
+    public static void EngineStart() {
+        Scanner sc = new Scanner(System.in);    
         // Create some items
         Item bandage = new Item(new Random().nextInt(1000),"Bandage", "A sterile bandage for wound care.");
         Item syringe = new Item(new Random().nextInt(1000),"Syringe", "A medical syringe for injections.");
@@ -24,5 +23,29 @@ public class Main {
         Nurse nurse = new Nurse("N001", "sixseven", "Alice", "Smith", "M.", "Female", "New York", "USA", "1985-05-15", 39);
         // Create an admin
         Admin admin = new Admin("A001", "adminpass", "John", "Doe", "P.", "Male", "Los Angeles", "USA", "1980-10-10", 44);
+    }
+
+
+
+
+
+
+
+
+
+
+    private static void createDoctorAccount() {
+        Scanner sc = new Scanner(System.in);
+        // Implementation for creating a doctor account
+    }
+
+    private static void createNurseAccount() {
+        Scanner sc = new Scanner(System.in);
+        // Implementation for creating a nurse account
+    }
+
+    private static void createAdminAccount() {
+        Scanner sc = new Scanner(System.in);
+        // Implementation for creating an admin account
     }
 }

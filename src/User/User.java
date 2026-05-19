@@ -3,6 +3,7 @@ package User;
 public class User {
     
     protected final String userID;
+    private final String password;
     protected final String firstName;
     protected final String lastName;
     protected final String middleName;
@@ -12,7 +13,7 @@ public class User {
     protected final String birthDate;
     protected final int age;
 
-    public User(String userID, String firstName, String lastName,
+    public User(String userID, String password, String firstName, String lastName,
                String middleName, String gender, String city,
                String country, String birthDate, int age) { 
         this.userID     = userID;
@@ -24,6 +25,11 @@ public class User {
         this.country = country;
         this.birthDate = birthDate;
         this.age = age;
+        setPassword(password);
+    }
+    private void setPassword(String password) {
+        // In a real application, you should hash the password before storing it
+        this.password = password;
     }
 
 

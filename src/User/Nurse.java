@@ -9,11 +9,11 @@ public class Nurse extends User {
 
 
 
-    public Nurse(String userID, String firstName, String lastName,
+    public Nurse(String userID, String password, String firstName, String lastName,
                  String middleName, String gender, String city,
                  String country, String birthDate, int age) {
 
-        super(userID, firstName, lastName, middleName, gender, city, country, birthDate, age);
+        super(userID, password, firstName, lastName, middleName, gender, city, country, birthDate, age);
 
     }
 
