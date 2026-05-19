@@ -1,4 +1,4 @@
-package Queue;
+package QueueMngr;
 
 import java.util.*;
 import Consultation_Logs.*;
