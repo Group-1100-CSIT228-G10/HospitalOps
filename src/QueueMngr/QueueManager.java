@@ -14,8 +14,15 @@ public class QueueManager{
         queue.add(ticket);
     }
 
-    public QueueTicket getNextInQueue() {
-        return queue.poll();
+    public Consultation getNextInQueueBySpeciality(String specialty, ArrayList<Consultation> consultationRecord) {
+        for (QueueTicket ticket : queue) {
+            if (ticket.doctorSpecialtyPreferred.equalsIgnoreCase(specialty)) {
+                queue.remove(ticket);
+                consultationRecord.add(ticket.consultation);
+                return ticket.consultation;
+            }
+        }
+        return null;
     }
 
     public void viewBySpecialty(String specialty) {

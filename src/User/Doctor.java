@@ -6,7 +6,7 @@ import Inventory.*;
 
 public class Doctor extends User {
 
-    private String specialization;
+    public String specialization;
     private List<Consultation> consultations = new ArrayList<>();
     private Consultation currentConsultation;
 
@@ -18,12 +18,15 @@ public class Doctor extends User {
     this.specialization = specialization;
     }
 
-    public void startConsultation() {
+    public void startConsultation(Consultation consultation) {
         if(currentConsultation == null){
-                currentConsultation = consultations.getFirst();
+                currentConsultation = consultation;
         }
-        else if(consultations.isEmpty()){
+        else if(consultation == null){
             System.out.println("No consultations available.");
+        }
+        else if(currentConsultation.isCompleted){
+            System.out.println("The current consultation is already completed.");
         }
         else{
             System.out.println("A consultation is already in progress. Please complete it before starting a new one.");
