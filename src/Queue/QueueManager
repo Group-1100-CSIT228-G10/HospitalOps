@@ -1,5 +1,26 @@
 package Queue;
 
 public class QueueManager{
+    private Queue<QueueTicket> queue;
 
+    public QueueManager() {
+        queue = new LinkedList<>();
+    }
+
+    public void addToQueue(QueueTicket ticket) {
+        queue.add(ticket);
+    }
+
+    public QueueTicket getNextInQueue() {
+        return queue.poll();
+    }
+
+    public void viewBySpecialty(String specialty) {
+        for (QueueTicket ticket : queue) {
+            if (ticket.doctorSpecialtyPreferred.equalsIgnoreCase(specialty)) {
+                System.out.println("Ticket ID: " + ticket.ticketID + ", Preferred Specialty: " + ticket.doctorSpecialtyPreferred);
+                System.out.println("Consultation Details: " + ticket.consultation.getDetails());
+            }
+        }
+    }
 }

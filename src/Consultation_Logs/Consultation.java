@@ -57,7 +57,12 @@ public class Consultation {
     }
 
     public void setDiagnosis(String diagnosis) {
-        this.diagnosis = diagnosis;
+        if(!isCompleted){
+            this.diagnosis = diagnosis;
+            isCompleted = true;
+        } else {
+            System.out.println("Cannot set diagnosis. Consultation is already completed.");
+        }
     }
 
     public void displayConsultationDetails() {

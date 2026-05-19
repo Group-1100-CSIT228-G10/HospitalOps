@@ -19,6 +19,10 @@ public class Supplier {
     }
 
     public List<StockTransaction> callToConfirm(){
+        if(pendingOrders.isEmpty()) {
+            System.out.println("No pending orders for supplier: " + name);
+            return Collections.emptyList();
+        }
         return processPendingOrders();
     }
 

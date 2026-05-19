@@ -1,7 +1,8 @@
 package User;
 
 import Inventory.*;
-import Consultation_Logs.UsageLog;
+import Consultation_Logs.*;
+import java.util.*;
 
 public class Nurse extends User {
 
@@ -20,7 +21,27 @@ public class Nurse extends User {
     //should also be able to update the inventory when doctors add items to usage logs during consultations
     
     
+    public void updateInventoryFromUsage(Map<Item, Integer> usage, Inventory inventory) {
+        for (Map.Entry<Item, Integer> entry : usage.entrySet()) {
+            Item item = entry.getKey();
+            int quantity = entry.getValue();
+            inventory.takeStock(Map.of(item, quantity));
+        }
+    }
+
+    public void makeOrder(Supplier supplier, Map<String, Integer> items) {
+        Order order = new Order("ORD" + new Random().nextInt(1000), items);
+        supplier.pendingOrders.add(order);
+    }
+
     
+
+    public void callSupplier(Supplier supplier, Inventory inventory) {
+        List<StockTransaction> transactions = supplier.callToConfirm();
+        for (StockTransaction transaction : transactions) {
+            inventory.addStock(transaction.getItems());
+        }
+    }
 
 
     // public void updateInventoryFromUsage(UsageLog log, Item item) {
