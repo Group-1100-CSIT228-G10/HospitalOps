@@ -22,7 +22,7 @@ public class QueueManager{
         for (QueueTicket ticket : queue) {
             if (ticket.doctorSpecialtyPreferred.equalsIgnoreCase(specialty)) {
                 System.out.println("Ticket ID: " + ticket.ticketID + ", Preferred Specialty: " + ticket.doctorSpecialtyPreferred);
-                System.out.println("Consultation Details: " + ticket.consultation.getDetails());
+                ticket.consultation.displayConsultationDetails();
             }
         }
     }

@@ -2,8 +2,7 @@ package User;
 
 import Consultation_Logs.*;
 import Inventory.*;
-import Queue.*;
-
+import QueueMngr.*;
 import java.util.*;
 
 public class Nurse extends User {
