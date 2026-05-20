@@ -9,11 +9,11 @@ public class Nurse extends User {
 
 
 
-    public Nurse(String userID, String firstName, String lastName,
+    public Nurse(String userID, String password, String firstName, String lastName,
                  String middleName, String gender, String city,
                  String country, String birthDate, int age) {
 
-        super(userID, firstName, lastName, middleName, gender, city, country, birthDate, age);
+        super(userID, password, firstName, lastName, middleName, gender, city, country, birthDate, age);
 
     }
 
@@ -24,6 +24,7 @@ public class Nurse extends User {
     public void createQueueTicket(String ticketID, String doctorSpecialtyPreferred, Consultation consultation, QueueManager queueManager) {
         QueueTicket ticket = new QueueTicket(ticketID, doctorSpecialtyPreferred, consultation);
         queueManager.addToQueue(ticket);
+        return;
     }
     
     public void updateInventoryFromUsage(Map<Item, Integer> usage, Inventory inventory) {
@@ -39,7 +40,7 @@ public class Nurse extends User {
         supplier.pendingOrders.add(order);
     }
 
-    public void callSupplier(Supplier supplier, Inventory inventory) {
+    public void callSupplier(String supplierContact, Inventory inventory) {
         List<StockTransaction> transactions = supplier.callToConfirm();
         for (StockTransaction transaction : transactions) {
             inventory.addStock(transaction.getItems());

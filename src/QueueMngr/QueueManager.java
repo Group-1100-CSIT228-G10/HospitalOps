@@ -14,7 +14,7 @@ public class QueueManager{
         queue.add(ticket);
     }
 
-    public Consultation getNextInQueueBySpeciality(String specialty, ArrayList<Consultation> consultationRecord) {
+    public Consultation getNextInQueueBySpeciality(String specialty, List<Consultation> consultationRecord) {
         for (QueueTicket ticket : queue) {
             if (ticket.doctorSpecialtyPreferred.equalsIgnoreCase(specialty)) {
                 queue.remove(ticket);

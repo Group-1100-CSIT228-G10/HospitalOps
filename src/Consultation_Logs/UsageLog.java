@@ -6,7 +6,7 @@ import Inventory.*;
 public class UsageLog {
 
     private String logName;
-    private ArrayList<Item> logList;
+    private List<Item> logList;
     public boolean processed;
 
     public UsageLog(String logName) {
@@ -24,6 +24,13 @@ public class UsageLog {
             return false;
         }
 
+    }
+
+    public List<Item> getLogList(String reason) {
+        if(reason.equalsIgnoreCase("review") || reason.equalsIgnoreCase("inventory update")) {
+            return logList;
+        }
+        return null;
     }
 
     public void displayLog() {

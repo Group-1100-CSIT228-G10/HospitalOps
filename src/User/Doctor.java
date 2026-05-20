@@ -7,14 +7,13 @@ import Inventory.*;
 public class Doctor extends User {
 
     public String specialization;
-    private List<Consultation> consultations = new ArrayList<>();
     private Consultation currentConsultation;
 
-    public Doctor(String userID, String firstName, String lastName, String middleName,
+    public Doctor(String userID, String password, String firstName, String lastName, String middleName,
               String gender, String city, String country,
               String birthDate, int age, String specialization) {
 
-    super(userID, firstName, lastName, middleName, gender, city, country, birthDate, age);
+    super(userID, password, firstName, lastName, middleName, gender, city, country, birthDate, age);
     this.specialization = specialization;
     }
 
@@ -35,7 +34,7 @@ public class Doctor extends User {
 
     public void viewPatientSymptoms() {
         if (currentConsultation != null) {
-            currentConsultation.getSymptoms();
+            currentConsultation.readSymptoms();
         } else {
             System.out.println("No consultation in progress.");
         }
@@ -61,9 +60,24 @@ public class Doctor extends User {
         }
     }
 
-    public void setDiagnosis(String diagnosis) {
+    public Consultation getCurrentConsultation(String reason) {
+        if(reason.equalsIgnoreCase("Cannot diagnose") || reason.equalsIgnoreCase("Need to review symptoms") || reason.equalsIgnoreCase("Need to review usage log")) {
+            if (currentConsultation != null) {
+                return currentConsultation;
+            } else {
+                System.out.println("No consultation in progress.");
+                return null;
+            }
+        } else {
+            System.out.println("Invalid reason for accessing the consultation.");
+            return null;
+        }
+    }
+
+    public void setDiagnosis(String diagnosis, Queue<UsageLog> usageLogs) {
         if (currentConsultation != null) {
             currentConsultation.setDiagnosis(diagnosis);
+            usageLogs.offer(currentConsultation.getUsageLog("Need to review usage log"));
             completeConsultation();
         }
     }
@@ -71,11 +85,14 @@ public class Doctor extends User {
     public void completeConsultation() {
         if (currentConsultation != null) {
             currentConsultation.isCompleted = true;
-            consultations.add(currentConsultation);
             currentConsultation = null;
         } else {
             System.out.println("No consultation in progress to complete.");
         }
+    }
+
+    public void consultationSetToNull() {
+        currentConsultation = null;
     }
 
     // public String getSpecialization() {

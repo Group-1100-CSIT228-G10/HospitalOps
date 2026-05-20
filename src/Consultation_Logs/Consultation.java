@@ -7,19 +7,54 @@ import Inventory.Item;
 public class Consultation {
 
     private Patient patient;
-    private Date date;
-    private ArrayList<String> symptoms;
+    private String date;
+    private List<String> symptoms;
     private UsageLog usageLog;
     private String diagnosis;
     public boolean isCompleted;
 
-    public Consultation(Patient patient, String LogName, Date date) {
+    public Consultation(Patient patient, String LogName, String date) {
         this.patient = patient;
         this.date = date;
         symptoms = new ArrayList<>();
         diagnosis = "";
         InitializeUsageLog(LogName);
         isCompleted = false;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public List<String> getSymptoms(String reason) {
+        if(reason.equals("admin")) {
+            return symptoms;
+        } else {
+            System.out.println("Access Denied: Insufficient Permissions");
+            return null;
+        }
+    }
+
+    public UsageLog getUsageLog(String reason) {
+        if(reason.equals("admin") || reason.equals("Need to review usage log")) {
+            return usageLog;
+        } else {
+            System.out.println("Access Denied: Insufficient Permissions");
+            return null;
+        }
+    }
+
+    public String getDiagnosis(String reason) {
+        if(reason.equals("admin")) {
+            return diagnosis;
+        } else {
+            System.out.println("Access Denied: Insufficient Permissions");
+            return null;
+        }
+    }
+
+    public boolean isComplete(){
+        return isCompleted;
     }
 
     public Patient getPatient() {
@@ -39,7 +74,7 @@ public class Consultation {
         symptoms.add(symptom);
     }
 
-    public void getSymptoms() {
+    public void readSymptoms() {
         System.out.println("Symptoms for patient " + patient.getFullName() + ":");
         for (String symptom : symptoms) {
             System.out.println(symptom);
@@ -67,8 +102,8 @@ public class Consultation {
 
     public void displayConsultationDetails() {
         if(isCompleted){
-        PatientDetails();
-            getSymptoms();
+            PatientDetails();
+            readSymptoms();
             System.out.println("Diagnosis: " + diagnosis);
             if (usageLog != null) {
                 usageLog.displayLog();
