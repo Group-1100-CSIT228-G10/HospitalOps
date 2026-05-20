@@ -78,6 +78,13 @@ public class Inventory {
             return new ArrayList<>();
         }
     }
+
+    public void displayAvailableItems() {
+        System.out.println("Available Items:");
+        for (Item item : AvailableItems) {
+            System.out.println("- " + item.name);
+        }
+    }
 }
 
 

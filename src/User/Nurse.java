@@ -24,6 +24,7 @@ public class Nurse extends User {
     public void createQueueTicket(String ticketID, String doctorSpecialtyPreferred, Consultation consultation, QueueManager queueManager) {
         QueueTicket ticket = new QueueTicket(ticketID, doctorSpecialtyPreferred, consultation);
         queueManager.addToQueue(ticket);
+        return;
     }
     
     public void updateInventoryFromUsage(Map<Item, Integer> usage, Inventory inventory) {
@@ -39,7 +40,7 @@ public class Nurse extends User {
         supplier.pendingOrders.add(order);
     }
 
-    public void callSupplier(Supplier supplier, Inventory inventory) {
+    public void callSupplier(String supplierContact, Inventory inventory) {
         List<StockTransaction> transactions = supplier.callToConfirm();
         for (StockTransaction transaction : transactions) {
             inventory.addStock(transaction.getItems());

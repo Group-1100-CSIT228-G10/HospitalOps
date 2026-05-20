@@ -7,13 +7,13 @@ import Inventory.Item;
 public class Consultation {
 
     private Patient patient;
-    private Date date;
+    private String date;
     private List<String> symptoms;
     private UsageLog usageLog;
     private String diagnosis;
     public boolean isCompleted;
 
-    public Consultation(Patient patient, String LogName, Date date) {
+    public Consultation(Patient patient, String LogName, String date) {
         this.patient = patient;
         this.date = date;
         symptoms = new ArrayList<>();
@@ -22,12 +22,39 @@ public class Consultation {
         isCompleted = false;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public List<String> getSymptoms() {
-        return symptoms;
+    public List<String> getSymptoms(String reason) {
+        if(reason.equals("admin")) {
+            return symptoms;
+        } else {
+            System.out.println("Access Denied: Insufficient Permissions");
+            return null;
+        }
+    }
+
+    public UsageLog getUsageLog(String reason) {
+        if(reason.equals("admin") || reason.equals("Need to review usage log")) {
+            return usageLog;
+        } else {
+            System.out.println("Access Denied: Insufficient Permissions");
+            return null;
+        }
+    }
+
+    public String getDiagnosis(String reason) {
+        if(reason.equals("admin")) {
+            return diagnosis;
+        } else {
+            System.out.println("Access Denied: Insufficient Permissions");
+            return null;
+        }
+    }
+
+    public boolean isComplete(){
+        return isCompleted;
     }
 
     public Patient getPatient() {
@@ -76,7 +103,7 @@ public class Consultation {
     public void displayConsultationDetails() {
         if(isCompleted){
             PatientDetails();
-            getSymptoms();
+            readSymptoms();
             System.out.println("Diagnosis: " + diagnosis);
             if (usageLog != null) {
                 usageLog.displayLog();
