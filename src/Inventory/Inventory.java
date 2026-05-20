@@ -61,7 +61,24 @@ public class Inventory {
         }
     }
 
-    
+    public Map<Item, Integer> getStock(String reason) {
+        if(reason.equals("admin")) {
+            return stock;
+        } else {
+            System.out.println("Access Denied: Insufficient Permissions");
+            return new HashMap<>();
+        }
+    }
+
+    public List<Item> getAvailableItems(String reason) {
+        if(reason.equals("admin")) {
+            return AvailableItems;
+        } else {
+            System.out.println("Access Denied: Insufficient Permissions");
+            return new ArrayList<>();
+        }
+    }
 }
+
 
 

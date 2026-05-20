@@ -8,7 +8,7 @@ public class Consultation {
 
     private Patient patient;
     private Date date;
-    private ArrayList<String> symptoms;
+    private List<String> symptoms;
     private UsageLog usageLog;
     private String diagnosis;
     public boolean isCompleted;
@@ -20,6 +20,14 @@ public class Consultation {
         diagnosis = "";
         InitializeUsageLog(LogName);
         isCompleted = false;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public List<String> getSymptoms() {
+        return symptoms;
     }
 
     public Patient getPatient() {
@@ -39,7 +47,7 @@ public class Consultation {
         symptoms.add(symptom);
     }
 
-    public void getSymptoms() {
+    public void readSymptoms() {
         System.out.println("Symptoms for patient " + patient.getFullName() + ":");
         for (String symptom : symptoms) {
             System.out.println(symptom);
@@ -67,7 +75,7 @@ public class Consultation {
 
     public void displayConsultationDetails() {
         if(isCompleted){
-        PatientDetails();
+            PatientDetails();
             getSymptoms();
             System.out.println("Diagnosis: " + diagnosis);
             if (usageLog != null) {
