@@ -11,6 +11,7 @@ public class Inventory {
     public Inventory(List<Item> availableItems) {
         this.stock = new HashMap<>();
         this.AvailableItems = availableItems;
+        initializeStock();
     }
 
     public void displayStock() {
@@ -81,8 +82,16 @@ public class Inventory {
 
     public void displayAvailableItems() {
         System.out.println("Available Items:");
+        int i = 1;
         for (Item item : AvailableItems) {
-            System.out.println("- " + item.name);
+            System.out.println(i + ". " + item.name);
+            i++;
+        }
+    }
+
+    private void initializeStock() {
+        for (Item item : AvailableItems) {
+            stock.put(item, 10);
         }
     }
 }
