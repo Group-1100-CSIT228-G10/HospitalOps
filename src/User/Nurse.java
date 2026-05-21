@@ -40,8 +40,21 @@ public class Nurse extends User {
         supplier.pendingOrders.add(order);
     }
 
-    public void callSupplier(String supplierContact, Inventory inventory) {
-        List<StockTransaction> transactions = supplier.callToConfirm();
+    public void callSupplier(String supplierContact, Inventory inventory, List<Supplier> suppliers) {
+        Supplier supplierToCallObj = null;
+        for(Supplier s : suppliers) {
+            if(s.contactInfo.equalsIgnoreCase(supplierContact)) {
+                supplierToCallObj = s;
+                break;
+            }
+        }                   
+        if(supplierToCallObj == null) {
+            System.out.println("Supplier not found.");
+            return;
+        }
+
+
+        List<StockTransaction> transactions = supplierToCallObj.callToConfirm();
         for (StockTransaction transaction : transactions) {
             inventory.addStock(transaction.getItems());
         }

@@ -32,6 +32,15 @@ public class Supplier {
         System.out.println("Contact: " + contactInfo);
     }
 
+    public void displayAvailableItems() {
+        System.out.println("Available Items from " + name + ":");
+        int i = 1;
+        for (Item item : availableItems) {
+            System.out.println(i + ". " + item.name);
+            i++;
+        }
+    }
+
     public void addAvailableItem(Item item) {
         if (!availableItems.contains(item)) {
             availableItems.add(item);
