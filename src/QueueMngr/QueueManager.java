@@ -3,12 +3,19 @@ package QueueMngr;
 import java.util.*;
 import Consultation_Logs.*;
 
-public class QueueManager{
+public class QueueManager {
     private Queue<QueueTicket> queue;
 
     public QueueManager() {
         queue = new LinkedList<>();
     }
+
+    // --- ADDED THIS FOR GUI COMPATIBILITY ---
+    // This allows the TableView in MainApp to access the queue data
+    public List<QueueTicket> getQueue() {
+        return new ArrayList<>(queue);
+    }
+    // ----------------------------------------
 
     public void addToQueue(QueueTicket ticket) {
         queue.add(ticket);

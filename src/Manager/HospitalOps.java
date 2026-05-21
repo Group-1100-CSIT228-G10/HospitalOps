@@ -9,7 +9,7 @@ import QueueMngr.*;
 public class HospitalOps {
     private static Scanner sc = new Scanner(System.in);
     private static List<String> doctorSpecialties = List.of("General Practitioner", "Pediatrician", "Cardiologist", "Dermatologist", "Neurologist");
-    private static List<Supplier> suppliers = new ArrayList<>();
+    public static List<Supplier> suppliers = new ArrayList<>();
     private static List<User> users = new ArrayList<>();
 
     // Kept these public so your MainApp GUI can access them!
@@ -17,7 +17,7 @@ public class HospitalOps {
     public static List<Consultation> consultationRecord = new ArrayList<>();
     public static QueueManager queueManager = new QueueManager();
 
-    private static Inventory inventory;
+    public static Inventory inventory;
 
     public static void EngineStart() {
         while(true){
