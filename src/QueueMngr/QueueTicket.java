@@ -13,6 +13,7 @@ public class QueueTicket {
         this.consultation = consultation;
     }
 
+    public String condition = "Stable"; // Default fallback
 
     public String getTicketID() { return ticketID; }
     public String getSpecialty() { return doctorSpecialtyPreferred; }

@@ -43,4 +43,6 @@ public class UsageLog {
     public void markProcessed() {
         this.processed = true;
     }
+    public String getLogName() { return logName; }
+    public List<Item> getItems() { return logList; }
 }
