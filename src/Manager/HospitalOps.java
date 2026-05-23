@@ -1,105 +1,97 @@
+package Manager;
 
-import java.io.*;
 import java.util.*;
 import User.*;
 import Inventory.*;
 import Consultation_Logs.*;
-import QueueMngr.*; 
-import Manager.*;
+import QueueMngr.*;
 
 public class HospitalOps {
     private static Scanner sc = new Scanner(System.in);
     private static List<String> doctorSpecialties = List.of("General Practitioner", "Pediatrician", "Cardiologist", "Dermatologist", "Neurologist");
-    private static List<Supplier> suppliers = new ArrayList<>();
+    public static List<Supplier> suppliers = new ArrayList<>();
     private static List<User> users = new ArrayList<>();
-    private static Queue<UsageLog> usageLogs = new LinkedList<>();
-    private static List<Consultation> consultationRecord = new ArrayList<>();
-    private static QueueManager queueManager = new QueueManager();
-    private static Inventory inventory;
+
+    // Kept these public so your MainApp GUI can access them!
+    public static Queue<UsageLog> usageLogs = new LinkedList<>();
+    public static List<Consultation> consultationRecord = new ArrayList<>();
+    public static QueueManager queueManager = new QueueManager();
+
+    public static Inventory inventory;
 
     public static void EngineStart() {
-        while(true){// Create some items
-        System.out.println("Welcome to HospitalOps! A hospital management system designed to streamline operations and enhance patient care.");
-        System.out.print("Are you a new user? (yes/no/exit): ");
-        String newUser = sc.nextLine();
+        while(true){
+            System.out.println("Welcome to HospitalOps! A hospital management system designed to streamline operations and enhance patient care.");
+            System.out.print("Are you a new user? (yes/no/exit): ");
+            String newUser = sc.nextLine();
 
-        if(newUser.equalsIgnoreCase("exit")) {
-            System.out.println("Exiting the system. Goodbye!");
-            return;
-        }
-
-        User userInSession = null;
-        if(newUser.equalsIgnoreCase("yes")) {
-            System.out.println("What type of account would you like to create? (Doctor or Nurse)");
-            String accountType = sc.nextLine();
-            User newAccount;
-            switch (accountType.toLowerCase()) {
-                case "doctor":
-                    newAccount = createDoctorAccount();
-                    break;
-                case "nurse":
-                    newAccount = createNurseAccount();
-                    break;
-                default:
-                    System.out.println("Invalid account type. Please try again.");
-                    return;
-            }
-            users.add(newAccount);
-            System.out.println("Account created successfully! You can now log in.");
-        }
-        
-        while(userInSession == null) {
-            System.out.print("Enter username: ");
-            String username = sc.nextLine();
-            System.out.print("Enter password: ");
-            String password = sc.nextLine();
-            if(username.equalsIgnoreCase("exit") || password.equalsIgnoreCase("exit")) {
+            if(newUser.equalsIgnoreCase("exit")) {
                 System.out.println("Exiting the system. Goodbye!");
                 return;
             }
-            userInSession = Login(username, password);
-        }
 
-        suppliers = initializeSuppliers();
-        inventory = initializeInventory();
-
-        while(userInSession != null) {
-            if(userInSession instanceof Doctor) {
-                System.out.println("Welcome, Dr. " + userInSession.getFullName() + "! You can now access your dashboard.");
-                DoctorDashboard((Doctor) userInSession);
-            } else if (userInSession instanceof Nurse) {
-                System.out.println("Welcome, Nurse " + userInSession.getFullName() + "! You can now access your dashboard.");
-                NurseDashboard((Nurse) userInSession);
-            }else {
-                System.out.println("Unknown user type. Access denied.");
-                logout(userInSession);
+            User userInSession = null;
+            if(newUser.equalsIgnoreCase("yes")) {
+                System.out.println("What type of account would you like to create? (Doctor or Nurse)");
+                String accountType = sc.nextLine();
+                User newAccount;
+                switch (accountType.toLowerCase()) {
+                    case "doctor":
+                        newAccount = createDoctorAccount();
+                        break;
+                    case "nurse":
+                        newAccount = createNurseAccount();
+                        break;
+                    default:
+                        System.out.println("Invalid account type. Please try again.");
+                        return;
+                }
+                users.add(newAccount);
+                System.out.println("Account created successfully! You can now log in.");
             }
 
-            System.out.println("Would you like to log out? (yes/no)");
-            String logoutChoice = sc.nextLine();
-            if(logoutChoice.equalsIgnoreCase("yes")) {
-                logout(userInSession);
-                break;
-            } else if(logoutChoice.equalsIgnoreCase("no")) {
-                System.out.println("Continuing session for " + userInSession.getFullName() + ".");
-            } else {
-                System.out.println("Invalid choice. Continuing session for " + userInSession.getFullName() + ".");
+            while(userInSession == null) {
+                System.out.print("Enter username: ");
+                String username = sc.nextLine();
+                System.out.print("Enter password: ");
+                String password = sc.nextLine();
+                if(username.equalsIgnoreCase("exit") || password.equalsIgnoreCase("exit")) {
+                    System.out.println("Exiting the system. Goodbye!");
+                    return;
+                }
+                userInSession = Login(username, password);
             }
 
+            suppliers = initializeSuppliers();
+            inventory = initializeInventory();
+
+            while(userInSession != null) {
+                if(userInSession instanceof Doctor) {
+                    System.out.println("Welcome, Dr. " + userInSession.getFullName() + "! You can now access your dashboard.");
+                    DoctorDashboard((Doctor) userInSession);
+                } else if (userInSession instanceof Nurse) {
+                    System.out.println("Welcome, Nurse " + userInSession.getFullName() + "! You can now access your dashboard.");
+                    NurseDashboard((Nurse) userInSession);
+                }else {
+                    System.out.println("Unknown user type. Access denied.");
+                    logout(userInSession);
+                }
+
+                System.out.println("Would you like to log out? (yes/no)");
+                String logoutChoice = sc.nextLine();
+                if(logoutChoice.equalsIgnoreCase("yes")) {
+                    logout(userInSession);
+                    break;
+                } else if(logoutChoice.equalsIgnoreCase("no")) {
+                    System.out.println("Continuing session for " + userInSession.getFullName() + ".");
+                } else {
+                    System.out.println("Invalid choice. Continuing session for " + userInSession.getFullName() + ".");
+                }
+            }
         }
     }
 
-        
-
-    }
-
-
-
-
-
-
-
-    private static User Login(String username, String password) {
+    public static User Login(String username, String password) {
         for(User user : users) {
             if(user.getUserID().equals(username) && user.checkPassword(password)) {
                 System.out.println("Login successful! Welcome, " + user.getFullName() + "!");
@@ -113,9 +105,7 @@ public class HospitalOps {
     private static void logout(User user) {
         System.out.println("Logging out " + user.getFullName() + ". Goodbye!");
         user = null;
-        // Additional cleanup can be done here if necessary
     }
-    
 
     public static void DoctorDashboard(Doctor doctor) {
         int option;
@@ -139,7 +129,8 @@ public class HospitalOps {
                     System.out.println("Starting consultation with next patient in queue... Press Enter to continue.");
                     sc.nextLine();
                     doctor.startConsultation(queueManager.getNextInQueueBySpeciality(doctor.specialization, consultationRecord));
-                    do
+
+                    // FIXED: Removed the stray "do" keyword!
                     while(true) {
                         System.out.println("Would you like to use an item? (yes/no)");
                         String addItem = sc.nextLine();
@@ -152,23 +143,24 @@ public class HospitalOps {
                             break;
                         }
                     }
+
                     System.out.println("Would you like to set a diagnosis? (yes/no)");
                     String setDiagnosis = sc.nextLine();
-                        if(setDiagnosis.equalsIgnoreCase("yes")) {
-                            System.out.println("Enter the diagnosis:");
-                            String diagnosis = sc.nextLine();
-                            doctor.setDiagnosis(diagnosis, usageLogs);
-                            System.out.println("Consultation completed and recorded.");
-                        }else{
-                            queueManager.addToQueue(new QueueTicket(Integer.toString(new Random().nextInt(1000)), doctor.specialization, doctor.getCurrentConsultation("Need to review symptoms")));
-                            doctor.consultationSetToNull();
-                            System.out.println("Consultation added back to the queue for review.");
-                        }
+                    if(setDiagnosis.equalsIgnoreCase("yes")) {
+                        System.out.println("Enter the diagnosis:");
+                        String diagnosis = sc.nextLine();
+                        doctor.setDiagnosis(diagnosis, usageLogs);
+                        System.out.println("Consultation completed and recorded.");
+                    } else {
+                        queueManager.addToQueue(new QueueTicket(Integer.toString(new Random().nextInt(1000)), doctor.specialization, doctor.getCurrentConsultation("Need to review symptoms")));
+                        doctor.consultationSetToNull();
+                        System.out.println("Consultation added back to the queue for review.");
+                    }
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
-        }while ( option != 0);
+        } while (option != 0);
     }
 
     private static void NurseDashboard(Nurse nurse) {
@@ -208,15 +200,14 @@ public class HospitalOps {
 
                     String symptom = "";
                     while(true) {
+                        System.out.println("Enter consultation symptoms (type 'done' when finished):");
+                        symptom = sc.nextLine();
                         if(symptom.equalsIgnoreCase("done")) {
                             break;
                         }
-                        System.out.println("Enter consultation symptoms (type 'done' when finished):");
-                        symptom = sc.nextLine();
                         consultation.addSymptom(symptom);
                     }
 
-                    
                     System.out.println("Enter preferred doctor specialty:");
                     String doctorSpecialtyPreferred = sc.nextLine();
                     nurse.createQueueTicket(Integer.toString(new Random().nextInt(1000)), doctorSpecialtyPreferred, consultation, queueManager);
@@ -254,7 +245,7 @@ public class HospitalOps {
                         System.out.println("Inventory updated based on consultation usage.");
                         break;
                     }
-                    System.out.println("No usage logs were processed.");                    
+                    System.out.println("No usage logs were processed.");
                     break;
                 case 3:
                     for(Supplier s : suppliers) {
@@ -307,11 +298,10 @@ public class HospitalOps {
                     break;
             }
 
-        }while ( option != 0);
+        } while (option != 0);
     }
 
     private static Doctor createDoctorAccount() {
-        // Implementation for creating a doctor account
         System.out.print("Enter a username: ");
         String username = sc.nextLine();
         System.out.print("Enter a password: ");
@@ -346,7 +336,6 @@ public class HospitalOps {
     }
 
     private static Nurse createNurseAccount() {
-        // Implementation for creating a nurse account
         System.out.print("Enter a username: ");
         String username = sc.nextLine();
         System.out.print("Enter a password: ");
@@ -372,7 +361,6 @@ public class HospitalOps {
         return new Nurse(username, password, firstName, lastName, middleInitial, gender, address, country, dateOfBirth, age);
     }
 
-
     private static void displayUserList() {
         System.out.println("Registered Users:");
         for(User user : users) {
@@ -381,39 +369,37 @@ public class HospitalOps {
     }
 
     private static Inventory initializeInventory() {
-        // Implementation for initializing inventory with items
         List<Item> availableItems = List.of(
-            new Item(new Random().nextInt(1000), "Bandage", "A strip of material used to bind a wound or to protect an injured part of the body."),
-            new Item(new Random().nextInt(1000), "Syringe", "A device used to inject fluids into or withdraw them from something."),
-            new Item(new Random().nextInt(1000), "Stethoscope", "An instrument used by medical professionals to listen to the internal sounds of a patient's body."),
-            new Item(new Random().nextInt(1000), "Thermometer", "An instrument for measuring and indicating temperature."),
-            new Item(new Random().nextInt(1000), "Gloves", "Protective hand coverings used in medical settings to prevent contamination."),
-            new Item(new Random().nextInt(1000), "Paracetamol", "A pain reliever and fever reducer."),
-            new Item(new Random().nextInt(1000), "Antibiotic Ointment", "A topical medication used to prevent infection in minor cuts, scrapes, and burns."),
-            new Item(new Random().nextInt(1000), "IV Drip", "A medical device used to deliver fluids, medication, or nutrients directly into a patient's bloodstream."),
-            new Item(new Random().nextInt(1000), "Anti-Allergy Medication", "A drug used to treat allergic reactions and symptoms."),
-            new Item(new Random().nextInt(1000), "High Blood Pressure Med", "A medication used to treat high blood pressure.")
-        );  
+                new Item(new Random().nextInt(1000), "Bandage", "A strip of material used to bind a wound or to protect an injured part of the body."),
+                new Item(new Random().nextInt(1000), "Syringe", "A device used to inject fluids into or withdraw them from something."),
+                new Item(new Random().nextInt(1000), "Stethoscope", "An instrument used by medical professionals to listen to the internal sounds of a patient's body."),
+                new Item(new Random().nextInt(1000), "Thermometer", "An instrument for measuring and indicating temperature."),
+                new Item(new Random().nextInt(1000), "Gloves", "Protective hand coverings used in medical settings to prevent contamination."),
+                new Item(new Random().nextInt(1000), "Paracetamol", "A pain reliever and fever reducer."),
+                new Item(new Random().nextInt(1000), "Antibiotic Ointment", "A topical medication used to prevent infection in minor cuts, scrapes, and burns."),
+                new Item(new Random().nextInt(1000), "IV Drip", "A medical device used to deliver fluids, medication, or nutrients directly into a patient's bloodstream."),
+                new Item(new Random().nextInt(1000), "Anti-Allergy Medication", "A drug used to treat allergic reactions and symptoms."),
+                new Item(new Random().nextInt(1000), "High Blood Pressure Med", "A medication used to treat high blood pressure.")
+        );
         return new Inventory(availableItems);
     }
 
     private static List<Supplier> initializeSuppliers() {
-        // Implementation for initializing suppliers with available items
         List<Item> supplier1Items = List.of(
-            new Item(new Random().nextInt(1000), "Bandage", "A strip of material used to bind a wound or to protect an injured part of the body."),
-            new Item(new Random().nextInt(1000), "Syringe", "A device used to inject fluids into or withdraw them from something."),
-            new Item(new Random().nextInt(1000), "Antibiotic Ointment", "A topical medication used to prevent infection in minor cuts, scrapes, and burns."),
-            new Item(new Random().nextInt(1000), "IV Drip", "A medical device used to deliver fluids, medication, or nutrients directly into a patient's bloodstream.")
+                new Item(new Random().nextInt(1000), "Bandage", "A strip of material used to bind a wound or to protect an injured part of the body."),
+                new Item(new Random().nextInt(1000), "Syringe", "A device used to inject fluids into or withdraw them from something."),
+                new Item(new Random().nextInt(1000), "Antibiotic Ointment", "A topical medication used to prevent infection in minor cuts, scrapes, and burns."),
+                new Item(new Random().nextInt(1000), "IV Drip", "A medical device used to deliver fluids, medication, or nutrients directly into a patient's bloodstream.")
         );
         List<Item> supplier2Items = List.of(
-            new Item(new Random().nextInt(1000), "Stethoscope", "An instrument used by medical professionals to listen to the internal sounds of a patient's body."),
-            new Item(new Random().nextInt(1000), "Thermometer", "An instrument for measuring and indicating temperature."),
-            new Item(new Random().nextInt(1000), "Anti-Allergy Medication", "A drug used to treat allergic reactions and symptoms."),
-            new Item(new Random().nextInt(1000), "High Blood Pressure Med", "A medication used to treat high blood pressure.")
+                new Item(new Random().nextInt(1000), "Stethoscope", "An instrument used by medical professionals to listen to the internal sounds of a patient's body."),
+                new Item(new Random().nextInt(1000), "Thermometer", "An instrument for measuring and indicating temperature."),
+                new Item(new Random().nextInt(1000), "Anti-Allergy Medication", "A drug used to treat allergic reactions and symptoms."),
+                new Item(new Random().nextInt(1000), "High Blood Pressure Med", "A medication used to treat high blood pressure.")
         );
         List<Item> supplier3Items = List.of(
-            new Item(new Random().nextInt(1000), "Gloves", "Protective hand coverings used in medical settings to prevent contamination."),
-            new Item(new Random().nextInt(1000), "Paracetamol", "A pain reliever and fever reducer.")
+                new Item(new Random().nextInt(1000), "Gloves", "Protective hand coverings used in medical settings to prevent contamination."),
+                new Item(new Random().nextInt(1000), "Paracetamol", "A pain reliever and fever reducer.")
         );
 
         Supplier supplier1 = new Supplier(1, "MediSupply Co.", "09123456789", supplier1Items);
@@ -421,5 +407,12 @@ public class HospitalOps {
         Supplier supplier3 = new Supplier(3, "MediCare Solutions", "09555555555", supplier3Items);
 
         return List.of(supplier1, supplier2, supplier3);
+    }
+
+    public static void injectTestUsers() {
+        if (users.isEmpty()) {
+            users.add(new Nurse("nurse", "123", "Jane", "Doe", "A", "Female", "Cebu", "PH", "1995-01-01", 31));
+            users.add(new Doctor("doctor", "123", "John", "Smith", "B", "Male", "Cebu", "PH", "1980-05-05", 46, "Cardiologist"));
+        }
     }
 }

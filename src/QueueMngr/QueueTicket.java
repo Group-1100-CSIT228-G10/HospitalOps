@@ -2,7 +2,7 @@ package QueueMngr;
 
 import Consultation_Logs.*;
 
-public class QueueTicket{
+public class QueueTicket {
     public String ticketID;
     public String doctorSpecialtyPreferred;
     public Consultation consultation;
@@ -12,4 +12,9 @@ public class QueueTicket{
         this.doctorSpecialtyPreferred = doctorSpecialtyPreferred;
         this.consultation = consultation;
     }
+
+    public String condition = "Stable"; // Default fallback
+
+    public String getTicketID() { return ticketID; }
+    public String getSpecialty() { return doctorSpecialtyPreferred; }
 }

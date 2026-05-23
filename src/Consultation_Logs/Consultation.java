@@ -1,20 +1,21 @@
 package Consultation_Logs;
 
 import java.util.*;
-
 import Inventory.Item;
 
 public class Consultation {
 
-    private Patient patient;
+    public Patient patient;
     private String date;
     private List<String> symptoms;
     private UsageLog usageLog;
     private String diagnosis;
     public boolean isCompleted;
+    private String consultationID; // Added this field
 
     public Consultation(Patient patient, String LogName, String date) {
         this.patient = patient;
+        this.consultationID = LogName; // Set the ID here
         this.date = date;
         symptoms = new ArrayList<>();
         diagnosis = "";
@@ -22,8 +23,18 @@ public class Consultation {
         isCompleted = false;
     }
 
+    @Override
+    public String toString() {
+        return getConsultationID() + " — " + patient.getFullName();
+    }
+
     public String getDate() {
         return date;
+    }
+
+    // Added this getter method
+    public String getConsultationID() {
+        return consultationID;
     }
 
     public List<String> getSymptoms(String reason) {
@@ -57,16 +68,22 @@ public class Consultation {
         return isCompleted;
     }
 
+    // --- ADDED FOR GUI COMPATIBILITY ---
+    public boolean isCompleted() {
+        return isComplete();
+    }
+    // ------------------------------------
+
     public Patient getPatient() {
         return patient;
-    }   
+    }
 
     public void PatientDetails() {
         System.out.println("Patient Details:");
         System.out.println("Name: " + patient.getFullName());
         System.out.println("Birth Date: " + patient.getBirthDate());
         System.out.println("Gender: " + patient.getGender());
-        System.out.println("Address: " + patient.getAddress());   
+        System.out.println("Address: " + patient.getAddress());
         System.out.println("Consultation Date: " + date.toString() );
     }
 
@@ -109,11 +126,13 @@ public class Consultation {
                 usageLog.displayLog();
             }
         } else {
-            System.out.println("Consultation is not completed yet. Please complete the consultation to view details."); 
+            System.out.println("Consultation is not completed yet. Please complete the consultation to view details.");
         }
     }
 
-    //private methods
+    public Patient getPatientObj() { return patient; }
+    public String getConsultationDate() { return date; }
+
     private void InitializeUsageLog(String logName) {
         if(usageLog == null){
             this.usageLog = new UsageLog(logName);
